@@ -9,6 +9,11 @@ describe Changeset do
       subject.should have(1).error_on(:story_id)
     end
 
+    it "must have a user" do
+      subject.user = nil
+      subject.should have(1).error_on(:user_id)
+    end
+
   end
 
   describe "#project_id" do
@@ -31,9 +36,11 @@ describe Changeset do
 
   end
 
+=begin
   describe ".since" do
     specify do
       Changeset.since(234).where_values.first.should == 'id > 234'
     end
   end
+=end
 end

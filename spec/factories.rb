@@ -23,11 +23,13 @@ FactoryGirl.define do
     s.title 'Test story'
     s.association :requested_by, :factory => :user
     s.association :project
+    s.association :acting_user, :factory => :user
   end
 
   factory :changeset do |c|
     c.association :story
     c.association :project
+    c.association :user, :factory => :user
   end
 
   factory :note do |n|

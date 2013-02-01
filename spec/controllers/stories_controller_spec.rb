@@ -208,6 +208,7 @@ describe StoriesController do
             {:title => 'New Title'}
           ) { story }
           story.should_receive(:requested_by_id=).with(user.id)
+          story.should_receive(:acting_user=).with(user)
         end
 
         context "when save succeeds" do

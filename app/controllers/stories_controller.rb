@@ -61,6 +61,7 @@ class StoriesController < ApplicationController
   def create
     @project = current_user.projects.find(params[:project_id])
     @story = @project.stories.build(filter_story_params)
+    @story.acting_user = current_user
     @story.requested_by_id = current_user.id unless @story.requested_by_id
     respond_to do |format|
       if @story.save

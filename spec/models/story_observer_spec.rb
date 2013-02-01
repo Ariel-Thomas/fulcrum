@@ -21,12 +21,14 @@ describe StoryObserver do
     context "when story state changed" do
 
       let(:project) { mock_model(Project) }
+      let(:acting_user)   { mock_model(User) }
 
       before do
         project.stub(:suppress_notifications => false)
         story.unstub(:state_changed?)
         story.stub(:state_changed? => true)
         story.stub(:project => project)
+        story.stub(:acting_user => acting_user)
       end
 
       context "when project start date is not set" do
@@ -44,14 +46,12 @@ describe StoryObserver do
 
       describe "notifications" do
 
-        let(:acting_user)   { mock_model(User) }
         let(:requested_by)  { mock_model(User, :email_delivery? => true) }
         let(:owned_by)      { mock_model(User, :email_acceptance? => true,
                                                :email_rejection? => true) }
         let(:notifier)      { mock("notifier") }
 
         before do
-          story.stub(:acting_user => acting_user)
           story.stub(:requested_by => requested_by)
           story.stub(:owned_by => owned_by)
           project.stub(:start_date => true)

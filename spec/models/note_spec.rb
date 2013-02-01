@@ -25,6 +25,7 @@ describe Note do
       changesets.should_receive(:create!)
       story.stub(:changesets  => changesets)
       story.stub(:project     => project)
+      story.stub(:acting_user => user)
     end
 
     it "creates a changeset on the story" do

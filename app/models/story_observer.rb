@@ -2,7 +2,7 @@ class StoryObserver < ActiveRecord::Observer
 
   # Create a new changeset whenever the story is changed
   def after_save(story)
-    story.changesets.create!
+    story.changesets.create!(:user => story.acting_user)
 
     if story.state_changed?
 
@@ -44,7 +44,7 @@ class StoryObserver < ActiveRecord::Observer
     if story.accepted_at_changed? && story.accepted_at && story.accepted_at < story.project.start_date
       story.project.update_attribute :start_date, story.accepted_at
     end
-
+    
   end
 
 end

@@ -10,7 +10,7 @@ class Note < ActiveRecord::Base
 
   # FIXME move to observer
   def create_changeset
-    story.changesets.create!
+    story.changesets.create!(:user => story.acting_user)
 
     unless story.project.suppress_notifications
       # Notify all stakeholders in the story, but not the user who made the

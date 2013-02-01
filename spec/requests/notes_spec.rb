@@ -55,7 +55,7 @@ describe "Notes" do
         end
       end
       find('#in_progress .story .notelist').should_not have_content('Delete me please')
-	end
+	  end
   end
 
 end
